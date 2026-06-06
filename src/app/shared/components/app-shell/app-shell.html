@@ -1,0 +1,37 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon"><mat-icon>school</mat-icon></div>
+      <div>
+        <div class="sidebar-brand-name">Main Campus</div>
+        <div class="sidebar-brand-sub">Admin Portal</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item"
+         routerLink="/dashboard"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+      <a class="nav-item"
+         routerLink="/students"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>group</mat-icon>
+        <span>Students</span>
+      </a>
+      <a class="nav-item"
+         routerLink="/teachers"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>person</mat-icon>
+        <span>Teachers</span>
+      </a>
+    </nav>
+  </aside>
+  <div class="main-content">
+    <router-outlet />
+  </div>
+</div>

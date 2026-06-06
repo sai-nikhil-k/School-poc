@@ -1,0 +1,171 @@
+<mat-toolbar color="primary">
+  <span>Dashboard</span>
+</mat-toolbar>
+
+<div class="page-container">
+
+  @if (loading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="48" />
+    </div>
+  } @else if (stats(); as s) {
+    @if (s.totalStudents === 0 && recent().length === 0) {
+      <div class="empty-container">
+        <mat-icon class="empty-icon">school</mat-icon>
+        <p>No data yet. Add some students to see stats here.</p>
+        <button mat-raised-button color="primary" routerLink="/students">
+          <span class="btn-icon-text"><mat-icon>add</mat-icon>Add Student</span>
+        </button>
+      </div>
+    } @else {
+
+      <!-- ── Stat cards ── -->
+      <div class="stat-cards-grid">
+
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <div class="stat-inner">
+              <div class="stat-text">
+                <p class="stat-label">Total Students</p>
+                <h3 class="stat-value">{{ s.totalStudents }}</h3>
+                <div class="stat-meta">
+                  <mat-icon class="meta-icon">trending_up</mat-icon>
+                  <span>Enrolled students</span>
+                </div>
+              </div>
+              <div class="stat-icon stat-icon-primary">
+                <mat-icon>group</mat-icon>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <div class="stat-inner">
+              <div class="stat-text">
+                <p class="stat-label">Recent Enrollments</p>
+                <h3 class="stat-value">{{ recent().length }}</h3>
+                <div class="stat-meta">
+                  <mat-icon class="meta-icon">check_circle</mat-icon>
+                  <span>Latest additions</span>
+                </div>
+              </div>
+              <div class="stat-icon stat-icon-secondary">
+                <mat-icon>person_add</mat-icon>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <div class="stat-inner">
+              <div class="stat-text">
+                <p class="stat-label">Grades Tracked</p>
+                <h3 class="stat-value">{{ s.byGrade.length }}</h3>
+                <div class="stat-meta">
+                  <mat-icon class="meta-icon">class</mat-icon>
+                  <span>Active grade levels</span>
+                </div>
+              </div>
+              <div class="stat-icon stat-icon-tertiary">
+                <mat-icon>school</mat-icon>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+
+      <!-- ── Main section: table 2/3 + chart 1/3 ── -->
+      <div class="main-grid">
+
+        <mat-card class="table-card">
+          <div class="table-card-header">
+            <h4 class="table-card-title">Last 5 Enrolled Students</h4>
+            <a class="view-all-link" routerLink="/students">View All</a>
+          </div>
+          <div class="enrolled-table-wrap">
+            <table class="enrolled-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Grade</th>
+                  <th>Enrolled Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (student of recent(); track student.id) {
+                  <tr>
+                    <td class="td-name">{{ student.firstName }} {{ student.lastName }}</td>
+                    <td>{{ student.grade }}</td>
+                    <td>{{ student.enrolledAt | date:'mediumDate' }}</td>
+                    <td><span class="status-badge active">Active</span></td>
+                  </tr>
+                }
+                @if (recent().length === 0) {
+                  <tr>
+                    <td colspan="4" class="td-empty">No recent enrollments.</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </mat-card>
+
+        <mat-card class="chart-card">
+          <div class="chart-card-header">
+            <h4 class="chart-card-title">Students per Grade</h4>
+          </div>
+          <div class="grade-bars">
+            @for (row of s.byGrade; track row.grade) {
+              <div class="grade-bar-row">
+                <div class="grade-bar-info">
+                  <span class="grade-bar-label">{{ row.grade }}</span>
+                  <span class="grade-bar-count">{{ row.count }}</span>
+                </div>
+                <div class="grade-bar-track">
+                  <div class="grade-bar-fill"
+                    [style.width.%]="s.totalStudents > 0 ? (row.count / s.totalStudents) * 100 : 0">
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </mat-card>
+
+      </div>
+
+      <!-- ── Bottom bento ── -->
+      <div class="bento-row">
+
+        <div class="bento-campus">
+          <div class="bento-campus-content">
+            <h3 class="bento-campus-title">Academic Excellence</h3>
+            <p class="bento-campus-sub">Reviewing performance metrics for the current semester.</p>
+          </div>
+        </div>
+
+        <div class="bento-event">
+          <h3 class="bento-event-title">Upcoming Faculty Meeting</h3>
+          <div class="bento-event-detail">
+            <mat-icon>calendar_today</mat-icon>
+            <span>Friday, Term End &bull; 09:00 AM</span>
+          </div>
+          <div class="bento-event-detail">
+            <mat-icon>location_on</mat-icon>
+            <span>Conference Room B</span>
+          </div>
+          <button mat-flat-button class="bento-event-btn" routerLink="/dashboard">
+            Add to Calendar
+          </button>
+        </div>
+
+      </div>
+
+    }
+  }
+
+</div>

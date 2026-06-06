@@ -1,0 +1,70 @@
+/* ---- Dialog loading ---- */
+.dialog-loading {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+/* ---- Section headers ---- */
+.form-section {
+  margin-bottom: 12px;
+}
+
+.form-section-divider {
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid #c5c5d4;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #24389c;
+  margin: 0 0 2px;
+}
+
+.section-sub {
+  font-size: 13px;
+  color: #454652;
+  margin: 0;
+}
+
+/* ---- Form layout ---- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+
+/* ---- Dialog actions ---- */
+mat-dialog-actions {
+  padding: 8px 24px 16px !important;
+  gap: 8px;
+}
+
+mat-dialog-actions mat-spinner {
+  display: inline-flex;
+}
+
+/* ---- Content padding ---- */
+mat-dialog-content {
+  padding-top: 8px !important;
+  max-height: 70vh;
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

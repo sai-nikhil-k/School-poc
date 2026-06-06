@@ -1,0 +1,91 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button routerLink="/teachers">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>Teacher Details</span>
+  <span class="toolbar-spacer"></span>
+  @if (teacher()) {
+    <button mat-stroked-button (click)="openEditDialog()">
+      <span class="btn-icon-text"><mat-icon>edit</mat-icon>Edit</span>
+    </button>
+    <button mat-raised-button color="warn" class="toolbar-action-gap" (click)="confirmDelete()">
+      <span class="btn-icon-text"><mat-icon>delete</mat-icon>Delete</span>
+    </button>
+  }
+</mat-toolbar>
+
+<div class="page-container">
+  @if (loading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="48" />
+    </div>
+  } @else if (teacher(); as t) {
+    <div class="detail-layout">
+
+      <!-- Left: Profile card -->
+      <div class="profile-col">
+        <div class="profile-card">
+          <div class="profile-body">
+            <div class="profile-avatar-lg">{{ t.firstName[0] }}{{ t.lastName[0] }}</div>
+            <h2 class="profile-name">{{ t.firstName }} {{ t.lastName }}</h2>
+            <p class="profile-subject">{{ t.subject }}</p>
+            <p class="profile-role">Teaching Faculty</p>
+          </div>
+          <div class="profile-meta">
+            <div class="meta-row">
+              <span class="meta-label">Status</span>
+              <span class="status-badge" [class.active]="t.isActive" [class.inactive]="!t.isActive">
+                {{ t.isActive ? 'Active' : 'Inactive' }}
+              </span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Joined</span>
+              <span class="meta-value">{{ t.joinedAt | date:'mediumDate' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Detail card -->
+      <div class="detail-col">
+        <mat-card>
+          <div class="card-header">
+            <h3 class="card-title">General Information</h3>
+            <span class="status-badge" [class.active]="t.isActive" [class.inactive]="!t.isActive">
+              {{ t.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </div>
+          <mat-card-content>
+            <div class="field-grid-2col">
+              <div class="field-cell">
+                <span class="field-label">Full Name</span>
+                <span class="field-value">{{ t.firstName }} {{ t.lastName }}</span>
+              </div>
+              <div class="field-cell">
+                <span class="field-label">Email</span>
+                <span class="field-value field-value-email">{{ t.email }}</span>
+              </div>
+              <div class="field-cell">
+                <span class="field-label">Subject</span>
+                <span class="field-value">{{ t.subject }}</span>
+              </div>
+              <div class="field-cell">
+                <span class="field-label">Phone</span>
+                <span class="field-value">{{ t.phoneNumber ?? '—' }}</span>
+              </div>
+              <div class="field-cell">
+                <span class="field-label">Join Date</span>
+                <span class="field-value">{{ t.joinedAt | date:'mediumDate' }}</span>
+              </div>
+              <div class="field-cell">
+                <span class="field-label">Created At</span>
+                <span class="field-value">{{ t.createdAt | date:'medium' }}</span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </div>
+  }
+</div>

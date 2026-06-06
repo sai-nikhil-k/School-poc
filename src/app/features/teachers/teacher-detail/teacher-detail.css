@@ -1,0 +1,174 @@
+.page-container {
+  padding: 32px 24px;
+}
+
+.toolbar-action-gap {
+  margin-left: 8px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 0;
+}
+
+/* ---- Two-column layout ---- */
+.detail-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ---- Profile card (left) ---- */
+.profile-card {
+  background: #ffffff;
+  border: 1px solid #c5c5d4;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.profile-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 28px 20px 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.profile-avatar-lg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #dee0ff;
+  color: #27378a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 3px solid #c5c5d4;
+  margin-bottom: 14px;
+}
+
+.profile-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1c1c;
+  margin: 0 0 4px;
+}
+
+.profile-subject {
+  font-size: 13px;
+  color: #24389c;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+
+.profile-role {
+  font-size: 12px;
+  color: #757684;
+  margin: 0;
+}
+
+.profile-meta {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.meta-label {
+  font-size: 13px;
+  color: #454652;
+  font-weight: 500;
+}
+
+.meta-value {
+  font-size: 13px;
+  color: #1a1c1c;
+}
+
+/* ---- Detail card (right) ---- */
+mat-card {
+  border-radius: 12px !important;
+  border: 1px solid #c5c5d4 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+mat-card-content {
+  padding: 0 !important;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #c5c5d4;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1c1c;
+  margin: 0;
+}
+
+/* ---- 2-col field grid inside card ---- */
+.field-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: none;
+}
+
+.field-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 24px;
+  border-bottom: 1px solid #eeeeee;
+  border-right: 1px solid #eeeeee;
+}
+
+.field-cell:nth-child(even) {
+  border-right: none;
+}
+
+.field-cell:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #454652;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.field-value {
+  font-size: 15px;
+  color: #1a1c1c;
+  word-break: break-word;
+}
+
+.field-value-email { color: #24389c; }
+
+@media (max-width: 768px) {
+  .detail-layout { grid-template-columns: 1fr; }
+  .field-grid-2col { grid-template-columns: 1fr; }
+  .field-cell { border-right: none; }
+}

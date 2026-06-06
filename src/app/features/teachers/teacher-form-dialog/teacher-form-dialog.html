@@ -1,0 +1,90 @@
+<h2 mat-dialog-title>{{ data.teacherId ? 'Edit Teacher' : 'Add Teacher' }}</h2>
+
+<mat-dialog-content>
+  @if (loading()) {
+    <div class="dialog-loading">
+      <mat-spinner diameter="40" />
+    </div>
+  } @else {
+    <form [formGroup]="form">
+
+      <div class="form-section">
+        <p class="section-title">Teacher Information</p>
+        <p class="section-sub">Fill in the details for this teacher.</p>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" placeholder="e.g. John" autocomplete="off">
+          @if (getError('firstName')) {
+            <mat-error>{{ getError('firstName') }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" placeholder="e.g. Smith" autocomplete="off">
+          @if (getError('lastName')) {
+            <mat-error>{{ getError('lastName') }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="john.smith@school.edu" autocomplete="off">
+          @if (getError('email')) {
+            <mat-error>{{ getError('email') }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+          <mat-label>Phone Number</mat-label>
+          <mat-icon matPrefix>phone</mat-icon>
+          <input matInput formControlName="phoneNumber" type="tel" placeholder="Optional" autocomplete="off">
+          @if (getError('phoneNumber')) {
+            <mat-error>{{ getError('phoneNumber') }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+          <mat-label>Subject</mat-label>
+          <input matInput formControlName="subject" placeholder="e.g. Mathematics" autocomplete="off">
+          @if (getError('subject')) {
+            <mat-error>{{ getError('subject') }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+          <mat-label>Join Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="joinedAt" [max]="maxDate">
+          <mat-datepicker-toggle matIconSuffix [for]="picker" />
+          <mat-datepicker #picker />
+          @if (getError('joinedAt')) {
+            <mat-error>{{ getError('joinedAt') }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="toggle-row">
+        <mat-slide-toggle formControlName="isActive" color="primary">Active</mat-slide-toggle>
+      </div>
+
+    </form>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" type="button" (click)="onSubmit()" [disabled]="submitting()">
+    @if (submitting()) {
+      <mat-spinner diameter="20" />
+    } @else {
+      {{ data.teacherId ? 'Save Changes' : 'Add Teacher' }}
+    }
+  </button>
+</mat-dialog-actions>

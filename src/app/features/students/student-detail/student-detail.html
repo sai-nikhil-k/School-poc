@@ -1,0 +1,112 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button routerLink="/students">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>Student Details</span>
+  <span class="toolbar-spacer"></span>
+  @if (student()) {
+    <button mat-stroked-button (click)="openEditDialog()">
+      <span class="btn-icon-text"><mat-icon>edit</mat-icon>Edit</span>
+    </button>
+    <button mat-raised-button color="warn" class="toolbar-action-gap" (click)="confirmDelete()">
+      <span class="btn-icon-text"><mat-icon>delete</mat-icon>Delete</span>
+    </button>
+  }
+</mat-toolbar>
+
+<div class="page-container">
+  @if (loading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="48" />
+    </div>
+  } @else if (student(); as s) {
+    <div class="detail-layout">
+
+      <!-- Left: Profile card + quick stats -->
+      <div class="profile-col">
+        <div class="profile-card">
+          <div class="profile-hero-band"></div>
+          <div class="profile-body">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar-lg">{{ s.firstName[0] }}{{ s.lastName[0] }}</div>
+            </div>
+            <h2 class="profile-name">{{ s.firstName }} {{ s.lastName }}</h2>
+            <p class="profile-sub">{{ s.grade }}</p>
+            <span class="status-badge active">Active Student</span>
+          </div>
+        </div>
+
+        <div class="quick-stats">
+          <div class="stat-card">
+            <p class="stat-label">Attendance</p>
+            <p class="stat-value">94%</p>
+            <div class="stat-bar-track">
+              <div class="stat-bar-fill" style="width: 94%"></div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">GPA</p>
+            <p class="stat-value">3.82</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Detail card -->
+      <div class="detail-col">
+        <mat-card>
+          <div class="card-header">
+            <h3 class="card-title">Personal Information</h3>
+            <span class="card-id">ID: STU-{{ s.id.substring(0, 8).toUpperCase() }}</span>
+          </div>
+          <mat-card-content>
+            <div class="detail-rows">
+              <div class="detail-row">
+                <span class="row-label">Full Name</span>
+                <span class="row-value">{{ s.firstName }} {{ s.lastName }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="row-label">Email</span>
+                <span class="row-value row-value-email">{{ s.email }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="row-label">Grade / Level</span>
+                <span class="row-value"><span class="grade-badge">{{ s.grade }}</span></span>
+              </div>
+              <div class="detail-row">
+                <span class="row-label">Date of Birth</span>
+                <span class="row-value">{{ s.dateOfBirth | date:'mediumDate' }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="row-label">Enrolled Date</span>
+                <span class="row-value">{{ s.enrolledAt | date:'mediumDate' }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="row-label">Created Date</span>
+                <span class="row-value">{{ s.createdAt | date:'medium' }}</span>
+              </div>
+              @if (s.guardianName) {
+                <div class="detail-row">
+                  <span class="row-label">Guardian Name</span>
+                  <span class="row-value">{{ s.guardianName }}</span>
+                </div>
+              }
+              @if (s.contactNumber) {
+                <div class="detail-row">
+                  <span class="row-label">Contact Number</span>
+                  <span class="row-value">{{ s.contactNumber }}</span>
+                </div>
+              }
+              @if (s.address) {
+                <div class="detail-row">
+                  <span class="row-label">Address</span>
+                  <span class="row-value">{{ s.address }}</span>
+                </div>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </div>
+  }
+</div>
