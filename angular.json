@@ -54,6 +54,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+      "allowedHosts": ["excavator-ranging-unisexual.ngrok-free.dev"]
+        },
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
