@@ -135,6 +135,7 @@ export class TeacherFormDialogComponent implements OnInit {
 
     action$.subscribe({
       next: () => {
+        this.submitting.set(false);
         const msg = this.isEditMode() ? 'Teacher updated successfully' : 'Teacher added successfully';
         this.snackBar.open(msg, 'Close', { duration: 3000 });
         this.dialogRef.close(true);

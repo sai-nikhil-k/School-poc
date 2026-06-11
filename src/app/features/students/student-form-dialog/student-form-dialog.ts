@@ -136,6 +136,7 @@ export class StudentFormDialogComponent implements OnInit {
 
     action$.subscribe({
       next: () => {
+        this.submitting.set(false);
         const msg = this.isEditMode()
           ? 'Student updated successfully'
           : 'Student added successfully';
